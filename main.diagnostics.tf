@@ -31,6 +31,13 @@ resource "azurerm_monitor_diagnostic_setting" "blob" {
     for_each = each.value.log_categories
 
     content {
+      category = enabled_log.value
+    }
+  }
+  dynamic "enabled_log" {
+    for_each = each.value.log_groups
+
+    content {
       category_group = enabled_log.value
     }
   }
