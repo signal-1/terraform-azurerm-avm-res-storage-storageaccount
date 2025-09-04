@@ -20,6 +20,17 @@ variable "account_kind" {
   }
 }
 
+variable "provisioned_billing_model_version" {
+  type        = string
+  default     = null
+  description = "(Optional) Specifies the version of the provisioned billing model (e.g. when account_kind = `FileStorage` for Storage File). Possible value is V2. Changing this forces a new resource to be created."
+
+  validation {
+    condition     = coalesce(var.provisioned_billing_model_version, "V2") == "V2"
+    error_message = "Must be null or \"V2\"."
+  }
+}
+
 variable "account_replication_type" {
   type        = string
   default     = "ZRS"

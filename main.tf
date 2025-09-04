@@ -5,6 +5,7 @@ resource "azurerm_storage_account" "this" {
   name                              = var.name
   resource_group_name               = var.resource_group_name
   access_tier                       = var.account_kind == "BlockBlobStorage" && var.account_tier == "Premium" ? null : var.access_tier
+  provisioned_billing_model_version = var.account_kind == "FileStorage" ? var.provisioned_billing_model_version : null
   account_kind                      = var.account_kind
   allow_nested_items_to_be_public   = var.allow_nested_items_to_be_public
   allowed_copy_scope                = var.allowed_copy_scope
